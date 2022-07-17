@@ -1,6 +1,7 @@
 package com.example.schoolregistrationsystem.model;
 
 import com.example.schoolregistrationsystem.dto.RequestDto;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -17,10 +18,11 @@ public class Course {
     @Column(name = "NAME", unique = true)
     private String name;
 
+    @ManyToMany(mappedBy = "courses",fetch = FetchType.LAZY)
+    @JsonIgnore
+    Set<Student> students = new HashSet<>();
     @Column(name = "CODE", unique = true)
     private String code;
-    @ManyToMany(mappedBy = "courses",fetch = FetchType.LAZY)
-    Set<Student> students = new HashSet<>();
 
     public static Course builderCourse(RequestDto req) {
         Course course = new Course();

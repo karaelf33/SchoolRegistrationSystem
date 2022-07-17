@@ -9,6 +9,7 @@ import com.example.schoolregistrationsystem.model.Student;
 import com.example.schoolregistrationsystem.repository.CourseRepository;
 import com.example.schoolregistrationsystem.repository.StudentRepository;
 import com.example.schoolregistrationsystem.service.CourseService;
+import com.example.schoolregistrationsystem.service.StudentService;
 import com.example.schoolregistrationsystem.utils.MapperUtils;
 import com.example.schoolregistrationsystem.utils.OperationUtils;
 import org.slf4j.Logger;
@@ -24,11 +25,14 @@ public class CourseServiceImpl implements CourseService {
 
     private final CourseRepository courseRepository;
     private final StudentRepository studentRepository;
+    private final StudentService studentService;
 
     public CourseServiceImpl(CourseRepository courseRepository,
-                             StudentRepository studentRepository) {
+                             StudentRepository studentRepository,
+                             StudentService studentService) {
         this.courseRepository = courseRepository;
         this.studentRepository = studentRepository;
+        this.studentService = studentService;
     }
 
     @Override
@@ -61,11 +65,8 @@ public class CourseServiceImpl implements CourseService {
     public GenericDto deleteCourse(String code) {
 
         try {
-            Optional<Course> courseIsExist = courseRepository.findByCode(code);
-            if (courseIsExist.isEmpty()) {
-                throw CommonException.notExistRecord();
-            }
-            courseRepository.deleteById(courseIsExist.get().getId());
+            Course courseIsExist = findCourse(code);
+            courseRepository.deleteById(courseIsExist.getId());
             return OperationUtils.returnMessageHandling(
                     null,
                     OperationUtils.SUCCESS_CODE,
@@ -84,18 +85,14 @@ public class CourseServiceImpl implements CourseService {
     @Override
     public GenericDto registerCourse(RequestDto req) {
         try {
-            Optional<Student> student = studentRepository.findByCode(req.getStudentCode());
+            Student student = studentService.findStudent(req.getStudentCode());
             Course course = findCourse(req.getCourseCode());
-            if (student.isEmpty()) {
-                throw CommonException.notExistRecord();
-            }
 
-
-            student.get().registerCourse(course);
-            studentRepository.save(student.get());
+            student.registerCourse(course);
+            studentRepository.save(student);
 
             return OperationUtils.returnMessageHandling(
-                    "Student Code" + student.get().getCode(),
+                    "Student Code" + student.getCode(),
                     OperationUtils.SUCCESS_CODE,
                     true,
                     OperationUtils.SUCCESS_MESSAGE);
@@ -117,15 +114,14 @@ public class CourseServiceImpl implements CourseService {
                 course,
                 OperationUtils.SUCCESS_CODE,
                 true,
-                OperationUtils.SUCCESS_MESSAGE
-        );
+                OperationUtils.SUCCESS_MESSAGE);
     }
 
     @Override
     public GenericDto getAllCourse() {
-        List<Course> courseList=courseRepository.findAll();
-          return OperationUtils.returnMessageHandling(
-                  courseList,
+        List<Course> courseList = courseRepository.findAll();
+        return OperationUtils.returnMessageHandling(
+                courseList,
                 OperationUtils.SUCCESS_CODE,
                 true,
                 OperationUtils.SUCCESS_MESSAGE

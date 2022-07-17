@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("api/v1/course")
 public class CourseController {
 
-    CourseService courseService;
+   private final CourseService courseService;
 
     public CourseController(CourseService courseService) {
         this.courseService = courseService;

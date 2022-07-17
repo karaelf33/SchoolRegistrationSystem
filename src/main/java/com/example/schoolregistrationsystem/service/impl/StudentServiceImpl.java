@@ -4,7 +4,6 @@ import com.example.schoolregistrationsystem.dto.GenericDto;
 import com.example.schoolregistrationsystem.dto.RequestDto;
 import com.example.schoolregistrationsystem.exception.CommonException;
 import com.example.schoolregistrationsystem.exception.ExceptionMessages;
-import com.example.schoolregistrationsystem.model.Course;
 import com.example.schoolregistrationsystem.model.Student;
 import com.example.schoolregistrationsystem.repository.StudentRepository;
 import com.example.schoolregistrationsystem.service.StudentService;
@@ -68,8 +67,7 @@ public class StudentServiceImpl implements StudentService {
                 student,
                 OperationUtils.SUCCESS_CODE,
                 true,
-                OperationUtils.SUCCESS_MESSAGE
-        );
+                OperationUtils.SUCCESS_MESSAGE);
     }
 
     @Override
@@ -79,11 +77,10 @@ public class StudentServiceImpl implements StudentService {
                 studentList,
                 OperationUtils.SUCCESS_CODE,
                 true,
-                OperationUtils.SUCCESS_MESSAGE
-        );
+                OperationUtils.SUCCESS_MESSAGE);
     }
 
-    private Student findStudent(String code) throws CommonException {
+    public Student findStudent(String code) throws CommonException {
         Optional<Student> studentIsExist = studentRepository.findByCode(code);
         if (studentIsExist.isEmpty()) {
             throw CommonException.notExistRecord();

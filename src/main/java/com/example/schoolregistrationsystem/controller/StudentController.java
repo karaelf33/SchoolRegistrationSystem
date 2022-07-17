@@ -13,27 +13,29 @@ import org.springframework.web.bind.annotation.*;
 public class StudentController {
 
 
-    StudentService studentService;
+    private final StudentService studentService;
 
     public StudentController(StudentService studentService) {
         this.studentService = studentService;
     }
 
-    @PostMapping(value = "",produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "", produces = MediaType.APPLICATION_JSON_VALUE)
     public GenericDto createStudent(@RequestBody RequestDto requestDto) throws CommonException {
         return studentService.createStudent(requestDto);
     }
 
-    @DeleteMapping(value = "{code}",produces = MediaType.APPLICATION_JSON_VALUE)
-    public GenericDto deleteStudent(@PathVariable String code) throws CommonException{
+    @DeleteMapping(value = "{code}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public GenericDto deleteStudent(@PathVariable String code) throws CommonException {
         return studentService.deleteStudent(code);
     }
-    @GetMapping(value="{code}",produces = MediaType.APPLICATION_JSON_VALUE)
+
+    @GetMapping(value = "{code}", produces = MediaType.APPLICATION_JSON_VALUE)
     public GenericDto getStudent(@PathVariable String code) throws CommonException {
         return studentService.getStudent(code);
     }
-    @GetMapping(value="",produces = MediaType.APPLICATION_JSON_VALUE)
-    public GenericDto getAllStudent()  {
+
+    @GetMapping(value = "", produces = MediaType.APPLICATION_JSON_VALUE)
+    public GenericDto getAllStudent() {
         return studentService.getAllStudent();
     }
 
