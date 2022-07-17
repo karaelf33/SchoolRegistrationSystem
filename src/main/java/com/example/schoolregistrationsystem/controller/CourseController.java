@@ -21,7 +21,7 @@ public class CourseController {
         return courseService.createCourse(requestDto);
     }
 
-    @PostMapping(value = "/code",produces = MediaType.APPLICATION_JSON_VALUE)
+    @DeleteMapping(value = "/code",produces = MediaType.APPLICATION_JSON_VALUE)
     public GenericDto deleteCourse(@RequestParam String code){
         return courseService.deleteCourse(code);
     }

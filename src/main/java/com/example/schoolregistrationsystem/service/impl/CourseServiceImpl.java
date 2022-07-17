@@ -3,11 +3,9 @@ package com.example.schoolregistrationsystem.service.impl;
 
 import com.example.schoolregistrationsystem.dto.GenericDto;
 import com.example.schoolregistrationsystem.dto.RequestDto;
-import com.example.schoolregistrationsystem.model.Course;
-import com.example.schoolregistrationsystem.model.CourseRegistration;
-import com.example.schoolregistrationsystem.model.Student;
 import com.example.schoolregistrationsystem.exception.CommonException;
-import com.example.schoolregistrationsystem.repository.CourseRegistrationRepository;
+import com.example.schoolregistrationsystem.model.Course;
+import com.example.schoolregistrationsystem.model.Student;
 import com.example.schoolregistrationsystem.repository.CourseRepository;
 import com.example.schoolregistrationsystem.repository.StudentRepository;
 import com.example.schoolregistrationsystem.service.CourseService;
@@ -25,14 +23,11 @@ public class CourseServiceImpl implements CourseService {
 
     private final CourseRepository courseRepository;
     private final StudentRepository studentRepository;
-    private final CourseRegistrationRepository courseRegistrationRepository;
 
     public CourseServiceImpl(CourseRepository courseRepository,
-                             StudentRepository studentRepository,
-                             CourseRegistrationRepository courseRegistrationRepository) {
+                             StudentRepository studentRepository) {
         this.courseRepository = courseRepository;
         this.studentRepository = studentRepository;
-        this.courseRegistrationRepository = courseRegistrationRepository;
     }
 
     @Override
@@ -93,24 +88,18 @@ public class CourseServiceImpl implements CourseService {
             if (student.isEmpty() || course.isEmpty()) {
                 throw CommonException.notExistRecord();
             }
-            if (student.get().getCapacity() == 5 || course.get().getCapacity() == 50) {
-                throw new CommonException("Student Capacity=" + student.get().getCapacity() +
-                        " Course Capacity=" + course.get().getCapacity() +
-                        "bound of capacity");
-            }
-            CourseRegistration courseRegistration = CourseRegistration.add(student.get(), course.get());
-            courseRegistrationRepository.save(courseRegistration);
-            course.get().setCapacity(course.get().getCapacity() + 1);
-            courseRepository.save(course.get());
-            student.get().setCapacity(student.get().getCapacity() + 1);
+
+
+            student.get().registerCourse(course.get());
             studentRepository.save(student.get());
+
             return OperationUtils.returnMessageHandling(
-                    null,
+                    "Student Code" + student.get().getCode(),
                     OperationUtils.SUCCESS_CODE,
                     true,
                     OperationUtils.SUCCESS_MESSAGE);
         } catch (Exception e) {
-            logger.error(e.getMessage());
+            logger.error("" + e);
             return OperationUtils.returnMessageHandling(
                     null,
                     OperationUtils.FAIL_CODE,

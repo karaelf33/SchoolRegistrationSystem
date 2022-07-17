@@ -1,34 +1,63 @@
 package com.example.schoolregistrationsystem.model;
 
 import com.example.schoolregistrationsystem.dto.RequestDto;
-import lombok.Data;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
 @Table(name = "COURSE")
-@Data
 public class Course {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
-    @Column(name = "NAME")
+    @Column(name = "NAME", unique = true)
     private String name;
 
-    @Column(name = "CODE")
+    @Column(name = "CODE", unique = true)
     private String code;
-    @Column(name = "CAPACITY")
-    private int capacity;
-    @ManyToMany
-    Set<Student> students;
+    @ManyToMany(mappedBy = "courses")
+    Set<Student> students = new HashSet<>();
 
     public static Course builderCourse(RequestDto req) {
-        Course course=new Course();
+        Course course = new Course();
         course.setName(req.getName());
         course.setCode(req.getCourseCode());
         return course;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public Set<Student> getStudents() {
+        return students;
+    }
+
+    public void setStudents(Set<Student> students) {
+        this.students = students;
     }
 }

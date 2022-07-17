@@ -3,6 +3,7 @@ package com.example.schoolregistrationsystem.controller;
 
 import com.example.schoolregistrationsystem.dto.GenericDto;
 import com.example.schoolregistrationsystem.dto.RequestDto;
+import com.example.schoolregistrationsystem.exception.CommonException;
 import com.example.schoolregistrationsystem.service.StudentService;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -19,12 +20,12 @@ public class StudentController {
     }
 
     @PostMapping(value = "",produces = MediaType.APPLICATION_JSON_VALUE)
-    public GenericDto createStudent(@RequestBody RequestDto requestDto){
+    public GenericDto createStudent(@RequestBody RequestDto requestDto) throws CommonException {
         return studentService.createStudent(requestDto);
     }
 
     @DeleteMapping(value = "",produces = MediaType.APPLICATION_JSON_VALUE)
-    public GenericDto deleteStudent(@RequestParam String code){
+    public GenericDto deleteStudent(@RequestParam String code) throws CommonException{
         return studentService.deleteStudent(code);
     }
 
