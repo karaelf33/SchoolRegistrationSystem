@@ -1,0 +1,19 @@
+package com.example.schoolregistrationsystem.dto;
+
+import lombok.Data;
+
+@Data
+public class RequestDto {
+
+    private String name;
+    private String surname;
+    private String studentCode;
+    private String courseCode;
+
+    public RequestDto(String name, String surname, String studentCode, String courseCode) {
+        this.name = name;
+        this.surname = surname;
+        this.studentCode = studentCode;
+        this.courseCode = courseCode;
+    }
+}
