@@ -7,7 +7,6 @@ public enum ExceptionMessages {
     THIS_REGISTRATION_ARE_DELETED("THIS REGISTRATION IS DELETED")
     ;
 
-
     private final String message;
 
     public String getMessage() {

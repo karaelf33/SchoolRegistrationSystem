@@ -1,17 +1,16 @@
 package com.example.schoolregistrationsystem.dto;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 public class GenericDto implements Serializable {
 
+    @Serial
     private static final long serialVersionUID = -6325709070873501087L;
 
     protected boolean resultFlag;
-
     protected String resultMessage;
-
     protected int resultCode;
-
     protected Object resultData;
 
     public boolean isResultFlag() {

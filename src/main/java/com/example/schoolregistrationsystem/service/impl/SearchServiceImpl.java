@@ -1,20 +1,17 @@
 package com.example.schoolregistrationsystem.service.impl;
 
-import com.example.schoolregistrationsystem.utils.SearchCriteria;
 import com.example.schoolregistrationsystem.dto.GenericDto;
 import com.example.schoolregistrationsystem.exception.ExceptionMessages;
 import com.example.schoolregistrationsystem.model.Course;
 import com.example.schoolregistrationsystem.model.Student;
 import com.example.schoolregistrationsystem.service.SearchService;
 import com.example.schoolregistrationsystem.utils.OperationUtils;
+import com.example.schoolregistrationsystem.utils.SearchCriteria;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
-import javax.persistence.TypedQuery;
-import javax.persistence.criteria.*;
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -55,25 +52,5 @@ public class SearchServiceImpl implements SearchService {
         }
 
 
-    }
-
-    public List<Student> findByCourseNames(String code) {
-        CriteriaBuilder cb = entityManager.getCriteriaBuilder();
-        CriteriaQuery<Student> cq = cb.createQuery(Student.class);
-        Root<Student> student = cq.from(Student.class);
-        List<Predicate> predicates = new ArrayList<>();
-
-        Subquery<Long> subquery = cq.subquery(Long.class);
-        Root<Student> subqueryStudent = subquery.from(Student.class);
-        Join<Course, Student> subqueryCourse = subqueryStudent.join("courses");
-
-        subquery.select(subqueryStudent.get("id")).where(cb.equal(subqueryCourse.get("code"), code));
-
-        predicates.add(cb.in(student.get("id")).value(subquery));
-
-        cq.where(cb.and(predicates.toArray(new Predicate[0])));
-        TypedQuery<Student> query = entityManager.createQuery(cq);
-
-        return query.getResultList();
     }
 }

@@ -92,7 +92,7 @@ public class CourseServiceImpl implements CourseService {
             studentRepository.save(student);
 
             return OperationUtils.returnMessageHandling(
-                    "Student Code" + student.getCode(),
+                    "Student Code: " + student.getCode(),
                     OperationUtils.SUCCESS_CODE,
                     true,
                     OperationUtils.SUCCESS_MESSAGE);

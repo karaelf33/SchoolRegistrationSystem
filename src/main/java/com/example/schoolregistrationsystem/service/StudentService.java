@@ -9,9 +9,7 @@ public interface StudentService {
 
     GenericDto createStudent(RequestDto requestDto) throws CommonException;
     GenericDto deleteStudent(String code) throws CommonException;
-
     GenericDto getStudent(String code) throws CommonException;
-
     GenericDto getAllStudent();
      Student findStudent(String code) throws CommonException;
 }
