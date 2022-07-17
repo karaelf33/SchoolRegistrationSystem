@@ -4,6 +4,7 @@ import com.example.schoolregistrationsystem.dto.GenericDto;
 import com.example.schoolregistrationsystem.dto.RequestDto;
 import com.example.schoolregistrationsystem.exception.CommonException;
 import com.example.schoolregistrationsystem.exception.ExceptionMessages;
+import com.example.schoolregistrationsystem.model.Course;
 import com.example.schoolregistrationsystem.model.Student;
 import com.example.schoolregistrationsystem.repository.StudentRepository;
 import com.example.schoolregistrationsystem.service.StudentService;
@@ -14,6 +15,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -48,11 +50,7 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public GenericDto deleteStudent(String code) throws CommonException {
-        Optional<Student> studentIsExist = studentRepository.findByCode(code);
-        if (studentIsExist.isEmpty()) {
-            throw CommonException.notExistRecord();
-        }
-        studentRepository.delete(studentIsExist.get());
+        studentRepository.delete(findStudent(code));
 
         return OperationUtils.returnMessageHandling(
                 null,
@@ -61,5 +59,35 @@ public class StudentServiceImpl implements StudentService {
                 ExceptionMessages.THIS_REGISTRATION_ARE_DELETED.getMessage());
 
 
+    }
+
+    @Override
+    public GenericDto getStudent(String code) throws CommonException {
+        Student student = findStudent(code);
+        return OperationUtils.returnMessageHandling(
+                student,
+                OperationUtils.SUCCESS_CODE,
+                true,
+                OperationUtils.SUCCESS_MESSAGE
+        );
+    }
+
+    @Override
+    public GenericDto getAllStudent() {
+        List<Student> studentList=studentRepository.findAll();
+        return OperationUtils.returnMessageHandling(
+                studentList,
+                OperationUtils.SUCCESS_CODE,
+                true,
+                OperationUtils.SUCCESS_MESSAGE
+        );
+    }
+
+    private Student findStudent(String code) throws CommonException {
+        Optional<Student> studentIsExist = studentRepository.findByCode(code);
+        if (studentIsExist.isEmpty()) {
+            throw CommonException.notExistRecord();
+        }
+        return studentIsExist.get();
     }
 }

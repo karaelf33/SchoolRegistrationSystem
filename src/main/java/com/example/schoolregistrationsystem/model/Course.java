@@ -19,7 +19,7 @@ public class Course {
 
     @Column(name = "CODE", unique = true)
     private String code;
-    @ManyToMany(mappedBy = "courses")
+    @ManyToMany(mappedBy = "courses",fetch = FetchType.LAZY)
     Set<Student> students = new HashSet<>();
 
     public static Course builderCourse(RequestDto req) {

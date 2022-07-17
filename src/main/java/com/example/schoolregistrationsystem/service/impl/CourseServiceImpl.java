@@ -15,6 +15,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -84,13 +85,13 @@ public class CourseServiceImpl implements CourseService {
     public GenericDto registerCourse(RequestDto req) {
         try {
             Optional<Student> student = studentRepository.findByCode(req.getStudentCode());
-            Optional<Course> course = courseRepository.findByCode(req.getCourseCode());
-            if (student.isEmpty() || course.isEmpty()) {
+            Course course = findCourse(req.getCourseCode());
+            if (student.isEmpty()) {
                 throw CommonException.notExistRecord();
             }
 
 
-            student.get().registerCourse(course.get());
+            student.get().registerCourse(course);
             studentRepository.save(student.get());
 
             return OperationUtils.returnMessageHandling(
@@ -107,5 +108,35 @@ public class CourseServiceImpl implements CourseService {
                     e.getMessage());
         }
 
+    }
+
+    @Override
+    public GenericDto getCourse(String code) throws CommonException {
+        Course course = findCourse(code);
+        return OperationUtils.returnMessageHandling(
+                course,
+                OperationUtils.SUCCESS_CODE,
+                true,
+                OperationUtils.SUCCESS_MESSAGE
+        );
+    }
+
+    @Override
+    public GenericDto getAllCourse() {
+        List<Course> courseList=courseRepository.findAll();
+          return OperationUtils.returnMessageHandling(
+                  courseList,
+                OperationUtils.SUCCESS_CODE,
+                true,
+                OperationUtils.SUCCESS_MESSAGE
+        );
+    }
+
+    public Course findCourse(String code) throws CommonException {
+        Optional<Course> course = courseRepository.findByCode(code);
+        if (course.isEmpty()) {
+            throw CommonException.notExistRecord();
+        }
+        return course.get();
     }
 }

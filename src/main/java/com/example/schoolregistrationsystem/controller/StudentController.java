@@ -24,9 +24,17 @@ public class StudentController {
         return studentService.createStudent(requestDto);
     }
 
-    @DeleteMapping(value = "",produces = MediaType.APPLICATION_JSON_VALUE)
-    public GenericDto deleteStudent(@RequestParam String code) throws CommonException{
+    @DeleteMapping(value = "{code}",produces = MediaType.APPLICATION_JSON_VALUE)
+    public GenericDto deleteStudent(@PathVariable String code) throws CommonException{
         return studentService.deleteStudent(code);
+    }
+    @GetMapping(value="{code}",produces = MediaType.APPLICATION_JSON_VALUE)
+    public GenericDto getStudent(@PathVariable String code) throws CommonException {
+        return studentService.getStudent(code);
+    }
+    @GetMapping(value="",produces = MediaType.APPLICATION_JSON_VALUE)
+    public GenericDto getAllStudent()  {
+        return studentService.getAllStudent();
     }
 
 }

@@ -2,6 +2,8 @@ package com.example.schoolregistrationsystem.utils;
 
 import com.example.schoolregistrationsystem.dto.GenericDto;
 
+import java.util.List;
+
 public class OperationUtils {
 
     private OperationUtils() {
@@ -14,6 +16,18 @@ public class OperationUtils {
 
 
     public static GenericDto returnMessageHandling(Object object, int resultCode, boolean resultFlag, String resultMessage) {
+
+        GenericDto genericDTO = new GenericDto();
+
+        genericDTO.setResultData(object);
+        genericDTO.setResultCode(resultCode);
+        genericDTO.setResultFlag(resultFlag);
+        genericDTO.setResultMessage(resultMessage);
+
+        return genericDTO;
+    }
+
+    public static GenericDto returnMessageHandling(List<Object> object, int resultCode, boolean resultFlag, String resultMessage) {
 
         GenericDto genericDTO = new GenericDto();
 
