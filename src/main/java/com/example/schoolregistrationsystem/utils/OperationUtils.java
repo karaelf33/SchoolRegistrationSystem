@@ -6,14 +6,11 @@ import java.util.List;
 
 public class OperationUtils {
 
-    private OperationUtils() {
-
-    }
+    private OperationUtils() {  }
 
     public static final int SUCCESS_CODE = 200;
     public static final String SUCCESS_MESSAGE = "SUCCESS";
     public static final int FAIL_CODE = 500;
-
 
     public static GenericDto returnMessageHandling(Object object, int resultCode, boolean resultFlag, String resultMessage) {
 

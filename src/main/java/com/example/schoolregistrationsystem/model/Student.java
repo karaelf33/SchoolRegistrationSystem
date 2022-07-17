@@ -2,6 +2,7 @@ package com.example.schoolregistrationsystem.model;
 
 import com.example.schoolregistrationsystem.dto.RequestDto;
 import com.example.schoolregistrationsystem.exception.CommonException;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -32,6 +33,7 @@ public class Student {
     @JoinTable(name = "student_course",
             joinColumns = @JoinColumn(name = "student_id"),
             inverseJoinColumns = @JoinColumn(name = "course_id"))
+    @JsonIgnore
     Set<Course> courses = new HashSet<>();
 
     public static Student builderStudent(RequestDto req) {

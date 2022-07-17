@@ -11,32 +11,33 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("api/v1/course")
 public class CourseController {
 
-   private final CourseService courseService;
-
+    private final CourseService courseService;
     public CourseController(CourseService courseService) {
         this.courseService = courseService;
     }
 
-    @PostMapping(value = "",produces = MediaType.APPLICATION_JSON_VALUE)
-    public GenericDto createCourse(@RequestBody RequestDto requestDto){
+    @PostMapping(value = "", produces = MediaType.APPLICATION_JSON_VALUE)
+    public GenericDto createCourse(@RequestBody RequestDto requestDto) {
         return courseService.createCourse(requestDto);
     }
 
-    @DeleteMapping(value = "/{code}",produces = MediaType.APPLICATION_JSON_VALUE)
-    public GenericDto deleteCourse(@PathVariable String code){
+    @DeleteMapping(value = "/{code}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public GenericDto deleteCourse(@PathVariable String code) {
         return courseService.deleteCourse(code);
     }
-    @PutMapping(value = "/register",produces = MediaType.APPLICATION_JSON_VALUE)
-    public GenericDto registerCourse(@RequestBody RequestDto requestDto){
+
+    @PutMapping(value = "/register", produces = MediaType.APPLICATION_JSON_VALUE)
+    public GenericDto registerCourse(@RequestBody RequestDto requestDto) {
         return courseService.registerCourse(requestDto);
     }
 
-    @GetMapping(value="{code}",produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "{code}", produces = MediaType.APPLICATION_JSON_VALUE)
     public GenericDto getCourse(@PathVariable String code) throws CommonException {
         return courseService.getCourse(code);
     }
-    @GetMapping(value="",produces = MediaType.APPLICATION_JSON_VALUE)
-    public GenericDto getAllCourse()  {
+
+    @GetMapping(value = "", produces = MediaType.APPLICATION_JSON_VALUE)
+    public GenericDto getAllCourse() {
         return courseService.getAllCourse();
     }
 }
