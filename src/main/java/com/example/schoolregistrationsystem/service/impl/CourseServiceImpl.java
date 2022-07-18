@@ -10,7 +10,6 @@ import com.example.schoolregistrationsystem.repository.CourseRepository;
 import com.example.schoolregistrationsystem.repository.StudentRepository;
 import com.example.schoolregistrationsystem.service.CourseService;
 import com.example.schoolregistrationsystem.service.StudentService;
-import com.example.schoolregistrationsystem.utils.MapperUtils;
 import com.example.schoolregistrationsystem.utils.OperationUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -37,6 +37,8 @@ The following guides illustrate how to use some features concretely:
 * [Managing Transactions](https://spring.io/guides/gs/managing-transactions/)
 
 
+### Postman Collection links =>https://www.getpostman.com/collections/6c093c85ecb6faef1ab2
+
 1-Create Student=
 
 POST http://localhost:8080/api/v1/student

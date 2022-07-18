@@ -7,9 +7,7 @@ import com.example.schoolregistrationsystem.model.Course;
 import com.example.schoolregistrationsystem.repository.CourseRepository;
 import com.example.schoolregistrationsystem.repository.StudentRepository;
 import com.example.schoolregistrationsystem.service.StudentService;
-import com.example.schoolregistrationsystem.utils.MapperUtils;
 import com.example.schoolregistrationsystem.utils.OperationUtils;
-import org.junit.Assert;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
@@ -18,7 +16,7 @@ import org.mockito.Mockito;
 import java.util.List;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class CourseServiceImplTest extends TestSupport {
