@@ -11,5 +11,5 @@ public interface CourseService {
     GenericDto registerCourse(RequestDto req);
     GenericDto getCourse(String code) throws CommonException;
 
-    GenericDto getAllCourse();
+    GenericDto getAllCourses();
 }

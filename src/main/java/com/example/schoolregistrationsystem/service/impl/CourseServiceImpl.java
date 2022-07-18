@@ -47,7 +47,7 @@ public class CourseServiceImpl implements CourseService {
             courseRepository.save(course);
 
             return OperationUtils.returnMessageHandling(
-                    MapperUtils.entityToHashMapMapper(course),
+                    course,
                     OperationUtils.SUCCESS_CODE,
                     true,
                     OperationUtils.SUCCESS_MESSAGE);
@@ -118,7 +118,7 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
-    public GenericDto getAllCourse() {
+    public GenericDto getAllCourses() {
         List<Course> courseList = courseRepository.findAll();
         return OperationUtils.returnMessageHandling(
                 courseList,

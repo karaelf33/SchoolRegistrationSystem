@@ -3,7 +3,6 @@ package com.example.schoolregistrationsystem.utils;
 import com.example.schoolregistrationsystem.dto.GenericDto;
 
 import java.util.List;
-
 public class OperationUtils {
 
     private OperationUtils() {  }

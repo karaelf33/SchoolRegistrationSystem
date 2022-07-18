@@ -18,4 +18,9 @@ public class RequestDto {
         this.studentCode = studentCode;
         this.courseCode = courseCode;
     }
+
+    public RequestDto(String name,String courseCode) {
+        this.name = name;
+        this.courseCode=courseCode;
+    }
 }

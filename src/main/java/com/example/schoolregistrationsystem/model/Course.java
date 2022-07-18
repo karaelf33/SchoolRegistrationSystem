@@ -2,6 +2,7 @@ package com.example.schoolregistrationsystem.model;
 
 import com.example.schoolregistrationsystem.dto.RequestDto;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -9,6 +10,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "COURSE")
+@EqualsAndHashCode
 public class Course {
 
     @Id

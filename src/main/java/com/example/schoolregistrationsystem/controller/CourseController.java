@@ -38,6 +38,6 @@ public class CourseController {
 
     @GetMapping(value = "", produces = MediaType.APPLICATION_JSON_VALUE)
     public GenericDto getAllCourse() {
-        return courseService.getAllCourse();
+        return courseService.getAllCourses();
     }
 }
