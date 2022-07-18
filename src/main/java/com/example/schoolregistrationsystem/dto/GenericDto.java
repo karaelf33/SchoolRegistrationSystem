@@ -1,8 +1,10 @@
 package com.example.schoolregistrationsystem.dto;
 
+import lombok.EqualsAndHashCode;
+
 import java.io.Serial;
 import java.io.Serializable;
-
+@EqualsAndHashCode
 public class GenericDto implements Serializable {
 
     @Serial

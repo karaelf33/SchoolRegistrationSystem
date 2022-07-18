@@ -1,8 +1,10 @@
 package com.example.schoolregistrationsystem.dto;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
 public class RequestDto {
 
     private String name;
